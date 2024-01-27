@@ -4,7 +4,8 @@ import { Users } from 'src/common/schema/users.schema';
 import { Model } from 'mongoose';
 import { CreateUserDto } from 'src/common/dtos/createuser.dto';
 import { Bcrypthelper } from 'src/Utilities/bcrypthelper';
-import { Signtoken } from 'src/Utilities/signToken';
+import { UserLogindto } from 'src/common/dtos/user_auth.dto';
+import * as bcrypt from 'bcrypt';
 
 
 
@@ -49,6 +50,15 @@ export class UserService {
         }else{
             return 'No user found'
         }
+
+    }
+
+    //validate password
+    async login(reqbody:UserLogindto){
+        const user = await this.userModel.findOne({"email":reqbody.email});
+        if(user && (await bcrypt.compare(reqbody.password,user.uniqueKey))){
+            return user;
+        }else throw new HttpException('invalid user details', HttpStatus.BAD_REQUEST)
 
     }
 

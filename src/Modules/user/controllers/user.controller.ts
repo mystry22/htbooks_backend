@@ -2,6 +2,7 @@ import { Body, Controller, HttpException, HttpStatus, Post, UsePipes, Validation
 import { CreateUserDto } from 'src/common/dtos/createuser.dto';
 import { UserService } from '../services/user/user.service';
 import { Signtoken } from 'src/Utilities/signToken';
+import { UserLogindto } from 'src/common/dtos/user_auth.dto';
 const tokenService = new Signtoken();
 
 @Controller('user')
@@ -29,5 +30,21 @@ export class UserController {
             throw new HttpException('User already exists',HttpStatus.BAD_REQUEST);
         }
        
+    }
+
+    @Post('auth')
+    @UsePipes(new ValidationPipe())
+    async authuser(@Body() reqBody: UserLogindto){
+
+        const isUser = await this.userService.login(reqBody);
+        if(isUser){
+            const payload = {email: reqBody.email};
+            const token =  tokenService.signUserToken(payload);
+            return {message: 'User authenticated successfully', token}
+        }
+        
+
+
+        
     }
 }

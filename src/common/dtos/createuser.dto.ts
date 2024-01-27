@@ -1,4 +1,3 @@
-import { Type } from "class-transformer";
 import { IsAlpha, IsEmail, IsNotEmpty, IsPhoneNumber, IsString, MinLength } from "class-validator";
 
 
