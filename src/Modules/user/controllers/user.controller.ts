@@ -1,11 +1,14 @@
 import { Body, Controller, HttpException, HttpStatus, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CreateUserDto } from 'src/common/dtos/createuser.dto';
 import { UserService } from '../services/user/user.service';
+import { Signtoken } from 'src/Utilities/signToken';
+const tokenService = new Signtoken();
 
 @Controller('user')
 export class UserController {
 
-    constructor(private userService: UserService){ }
+    constructor(private userService: UserService
+        ){ }
 
     @Post('signup')
     @UsePipes(new ValidationPipe())
@@ -18,7 +21,9 @@ export class UserController {
             //register the new user
             const response : string =  await this.userService.saveNewUser(reqBody);
             if(response == 'user created successfully'){
-                return {message : 'user created successfully', user: reqBody}
+                const payload = {email:reqBody.email};
+                const token = tokenService.signUserToken(payload);
+                return {message: 'User created successfully', token:token};
             }
         }else{
             throw new HttpException('User already exists',HttpStatus.BAD_REQUEST);

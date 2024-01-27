@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { IsAlpha, IsDate, IsEmail, IsNotEmpty, IsNumber, IsPhoneNumber, IsString, MinLength } from "class-validator";
+import { IsAlpha, IsEmail, IsNotEmpty, IsPhoneNumber, IsString, MinLength } from "class-validator";
 
 
 export class CreateUserDto{
@@ -33,5 +33,10 @@ export class CreateUserDto{
     @IsString()
     @IsNotEmpty()
     uuid_code : string;
+
+    @IsNotEmpty()
+    @IsString()
+    @MinLength(3)
+    password: string;
 
 }

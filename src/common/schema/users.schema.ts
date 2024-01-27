@@ -28,6 +28,9 @@ export class Users{
     @Prop()
     uuid_code: string;
 
+    @Prop()
+    uniqueKey: string;
+
 
 }
 
