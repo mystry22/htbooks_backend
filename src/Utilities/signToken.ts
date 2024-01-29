@@ -1,4 +1,4 @@
-import { sign } from 'jsonwebtoken';
+import { sign, verify } from 'jsonwebtoken';
 import { JWT_SECRET } from 'src/common/config/env.config';
 import { JWT_EXPIRES } from 'src/common/config/env.config';
 
@@ -10,7 +10,7 @@ export class Signtoken{
         return sign(payload,JWT_SECRET,{expiresIn:JWT_EXPIRES});
     }
 
-    decodeUserToken(){
-
+    decodeUserToken(payload:any){
+        
     }
 }

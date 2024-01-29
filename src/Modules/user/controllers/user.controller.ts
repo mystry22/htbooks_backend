@@ -1,9 +1,10 @@
-import { Body, Controller, HttpException, HttpStatus, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, HttpException, HttpStatus, Post, UseGuards, UsePipes, ValidationPipe,Request } from '@nestjs/common';
 import { CreateUserDto } from 'src/common/dtos/createuser.dto';
 import { UserService } from '../services/user/user.service';
 import { Signtoken } from 'src/Utilities/signToken';
 import { UserLogindto } from 'src/common/dtos/user_auth.dto';
 const tokenService = new Signtoken();
+import { Userguard } from 'src/common/guards/user.auth.guard';
 
 @Controller('user')
 export class UserController {
@@ -42,9 +43,14 @@ export class UserController {
             const token =  tokenService.signUserToken(payload);
             return {message: 'User authenticated successfully', token}
         }
-        
-
 
         
+    }
+
+    @Post('userdetails')
+    @UseGuards(Userguard)
+    async getuserdetails(@Request() req){
+        const userDetails = this.userService.checkUser(req.user.email);
+        return userDetails;
     }
 }
