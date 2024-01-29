@@ -33,6 +33,11 @@ export class AdminController {
     @Post('login')
     @UsePipes(new ValidationPipe())
     async login(@Body() reqBody: UserLogindto){
-        return 'holla'
+        const isUser = await this.adminService.login(reqBody);
+        if(isUser){
+            const payload = {email: reqBody.email};
+            const token =  tokenService.signUserToken(payload);
+            return {message: 'User authenticated successfully', token}
+        }
     }
 }

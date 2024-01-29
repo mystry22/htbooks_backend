@@ -4,6 +4,9 @@ import { Admins } from 'src/common/schema/admin.schema';
 import { Model } from 'mongoose';
 import { AdminDto } from 'src/common/dtos/createadmin.dto';
 import { Bcrypthelper } from 'src/Utilities/bcrypthelper';
+import { UserLogindto } from 'src/common/dtos/user_auth.dto';
+import * as bcrypt from 'bcrypt';
+
 
 
 @Injectable()
@@ -50,5 +53,14 @@ export class AdminService {
         if (isUpdated) {
             return 'password updated'
         }
+    }
+
+    //login admin
+    async login(reqbody:UserLogindto){
+        const user = await this.adminModel.findOne({"email":reqbody.email});
+        if(user && (await bcrypt.compare(reqbody.password,user.uniqueKey))){
+            return user;
+        }else throw new HttpException('invalid user details', HttpStatus.BAD_REQUEST)
+
     }
 }

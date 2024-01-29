@@ -53,7 +53,7 @@ export class UserService {
 
     }
 
-    //validate password
+    //login users
     async login(reqbody:UserLogindto){
         const user = await this.userModel.findOne({"email":reqbody.email});
         if(user && (await bcrypt.compare(reqbody.password,user.uniqueKey))){
