@@ -22,5 +22,5 @@ export class AdminDto{
 
     @IsNotEmpty()
     @MinLength(6)
-    uniqueKey: string;
+    password: string;
 }
