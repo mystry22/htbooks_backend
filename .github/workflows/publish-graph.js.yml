@@ -4,7 +4,7 @@ name: Devtools
 on:
   push:
     branches:
-      - dev
+      - main
 
 jobs:
   publish:
