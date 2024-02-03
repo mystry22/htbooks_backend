@@ -9,7 +9,6 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { UploadService } from '../service/upload.service';
 import { BUCKET_NAME,AWS_S3_REGION } from 'src/common/config/env.config';
 
-
 const tokenService = new Signtoken();
 
 @Controller('admin')
