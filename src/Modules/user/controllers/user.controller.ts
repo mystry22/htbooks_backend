@@ -53,4 +53,9 @@ export class UserController {
         const userDetails = this.userService.checkUser(req.user.email);
         return userDetails;
     }
+
+    @Post('test')
+    test(){
+        return {message: 'This is working from my end'}
+    }
 }
