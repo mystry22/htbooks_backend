@@ -26,8 +26,7 @@ jobs:
         run: |
           touch .env
           echo "${{secrets.PROD_ENV_FILE}}" > .env
-      - name: Publish
-        run: PUBLISH_GRAPH=true npm run start
+          npm run start
         env:
           DEVTOOLS_API_KEY: PROD_ENV_FILE
           REPOSITORY_NAME: ${{ github.event.repository.name }}
