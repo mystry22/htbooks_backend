@@ -9,7 +9,7 @@ import { MONGODB_DB_CONNECTION } from 'src/common/config/env.config';
   imports: [UserModule,
     AdminModule,
   ConfigModule.forRoot(),
-  MongooseModule.forRoot(MONGODB_DB_CONNECTION)
+  MongooseModule.forRoot(process.env.MONGODB_DB_CONNECTION)
 ],
   providers: [],
 })
