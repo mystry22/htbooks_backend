@@ -27,8 +27,4 @@ jobs:
           touch .env
           echo "${{secrets.PROD_ENV_FILE}}" > .env
           npm run start
-        env:
-          DEVTOOLS_API_KEY: PROD_ENV_FILE
-          REPOSITORY_NAME: ${{ github.event.repository.name }}
-          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
-          TARGET_SHA: ${{ github.event.pull_request.base.sha }}
+        
