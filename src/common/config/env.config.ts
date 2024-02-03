@@ -10,5 +10,7 @@ export const AWS_SECRET_ACCESS_KEY  = env.get('AWS_SECRET_ACCESS_KEY').asString(
 export const AWS_S3_REGION  = env.get('AWS_S3_REGION').asString();
 export const BUCKET_NAME  = env.get('BUCKET_NAME').asString();
 export const MONGODB_DB_CONNECTION  = env.get('MONGODB_DB_CONNECTION').asString();
+export const PORT  = env.get('PORT').asString();
+
 
 
