@@ -24,7 +24,8 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         shell: bash
         run: |
-          echo "COMMIT_SHA=\${GITHUB_SHA}" >> \${GITHUB_ENV}
+          touch .env
+          echo "${{secrets.PROD_ENV_FILE}}" > .env
       - name: Publish
         run: PUBLISH_GRAPH=true npm run start
         env:
