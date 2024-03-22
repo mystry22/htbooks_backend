@@ -56,6 +56,6 @@ export class UserController {
 
     @Post('test')
     test(){
-        return {message: 'This is working from my end'}
+        return {message: 'This is working from my end ok'}
     }
 }
