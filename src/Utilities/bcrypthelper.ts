@@ -11,7 +11,5 @@ export class Bcrypthelper {
 
     }
 
-    deEncryptPassword() {
-
-    }
+  
 }
